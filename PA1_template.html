@@ -355,22 +355,9 @@ pre code {
 <div id="loading-and-preprocessing-the-data" class="section level2">
 <h2>Loading and preprocessing the data</h2>
 <p>I loaded the data Via read.csv function, and then by summary function we can have a taste on our data!</p>
-<pre class="r"><code>library(lubridate)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;lubridate&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     date, intersect, setdiff, union</code></pre>
-<pre class="r"><code>library(dplyr)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>library(ggplot2)
+<pre class="r"><code>library(lubridate)
+library(dplyr)
+library(ggplot2)
 data &lt;- read.csv(&quot;./activity.csv&quot;,header = T)
 summary(data)</code></pre>
 <pre><code>##      steps            date              interval     
@@ -486,10 +473,10 @@ ggplot(data = df_q3, aes(x = sum_of_step)) +
 <p>It clearing indicating that missing value are concentrated in certain date!(If it’s evenly or randomly distributed in different dates, we supposed to see entire distribution shifting rightward.) As a matter of fact, we can use table to confirm my thoughts. and indeed NA value concentrated in 8 days, and these 8 days are full of NA value.</p>
 <pre class="r"><code>table(data$date[is.na(data$steps)])</code></pre>
 <pre><code>## 
-## 2012-10-01 2012-10-08 2012-11-01 2012-11-04 2012-11-09 2012-11-10 2012-11-14 
-##        288        288        288        288        288        288        288 
-## 2012-11-30 
-##        288</code></pre>
+## 2012-10-01 2012-10-08 2012-11-01 2012-11-04 2012-11-09 2012-11-10 
+##        288        288        288        288        288        288 
+## 2012-11-14 2012-11-30 
+##        288        288</code></pre>
 <p>Let’s see how mean and median of total number of steps taken per day changes after imputing missing value with average.</p>
 <pre class="r"><code>table &lt;- df_q3 %&gt;%
     group_by(seq) %&gt;%

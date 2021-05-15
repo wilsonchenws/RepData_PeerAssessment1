@@ -13,41 +13,7 @@ I loaded the data Via read.csv function, and then by summary function we can hav
 
 ```r
 library(lubridate)
-```
-
-```
-## 
-## Attaching package: 'lubridate'
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     date, intersect, setdiff, union
-```
-
-```r
 library(dplyr)
-```
-
-```
-## 
-## Attaching package: 'dplyr'
-```
-
-```
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-```
-
-```r
 library(ggplot2)
 data <- read.csv("./activity.csv",header = T)
 summary(data)
@@ -106,7 +72,7 @@ ggplot(data = df_q1, aes(x = sum_of_step )) +
     geom_text(aes(label = paste("median:",format(round(median(df_q1$sum_of_step),2),big.mark = ",")),x =median(df_q1$sum_of_step),y=10),hjust = -0.1, vjust = 0.5,color = "#00BFC4")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-29-1.png)<!-- -->
 
 ## what is the average daily activity pattern?
 To plot time series of daily activity pattern, we first calculate average numbers of steps taken across all days via following steps:
@@ -143,7 +109,7 @@ ggplot(data = df_q2, aes(x = time, y = avg_step))+
     ylab("Average # of steps taken averaged across all days")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-30-1.png)<!-- -->
 ## Imputing missing values
 
 From the summary result in the 1st code chunk, we know that there's 2304 observation missing "steps".
@@ -191,7 +157,7 @@ ggplot(data = df_q3, aes(x = sum_of_step)) +
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-32-1.png)<!-- -->
 From above graph, we can noticed that most part of distribution (Purple part.) doesn't change at all but huge decrease of frequency of 0 steps per day, and sudden increase of frequency of 11,000 steps per day.
 
 It clearing indicating that missing value are concentrated in certain date!(If it's evenly or randomly distributed in different dates, we supposed to see entire distribution shifting rightward.)
@@ -203,10 +169,10 @@ table(data$date[is.na(data$steps)])
 
 ```
 ## 
-## 2012-10-01 2012-10-08 2012-11-01 2012-11-04 2012-11-09 2012-11-10 2012-11-14 
-##        288        288        288        288        288        288        288 
-## 2012-11-30 
-##        288
+## 2012-10-01 2012-10-08 2012-11-01 2012-11-04 2012-11-09 2012-11-10 
+##        288        288        288        288        288        288 
+## 2012-11-14 2012-11-30 
+##        288        288
 ```
 Let's see how mean and median of total number of steps taken per day changes after imputing missing value with average.
 
@@ -271,7 +237,7 @@ ggplot(df_q4,aes(time,average_steps,fill = weekday,color = weekday))+
   scale_x_datetime(date_labels = ("%H:%M"))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-36-1.png)<!-- -->
 
 At last, we can see from the plot that the most active interval in weekday centered at 7 a.m. and 7 p.m. , which is probably the subject's commute time to school/office. And in weekend, active time intervals are more scattered throughout the day. There're other interesting active time interval worth more investigation. (ex: why the subject are active around 4 p.m both in weekend and weekday.), but that's beyond the scope of assignment and maybe required information more than the data set.
 
