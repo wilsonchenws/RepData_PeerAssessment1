@@ -1,0 +1,68 @@
+---
+title: "Reproducible Research: Peer Assessment 1"
+output: 
+  html_document:
+    keep_md: true
+---
+
+
+## Loading and preprocessing the data
+
+Via read.csv function to load the our data set.  
+Then by summary function we can have a taste on our data!
+
+```r
+data <- read.csv("./activity.csv",header = T)
+summary(data)
+```
+
+```
+##      steps            date              interval     
+##  Min.   :  0.00   Length:17568       Min.   :   0.0  
+##  1st Qu.:  0.00   Class :character   1st Qu.: 588.8  
+##  Median :  0.00   Mode  :character   Median :1177.5  
+##  Mean   : 37.38                      Mean   :1177.5  
+##  3rd Qu.: 12.00                      3rd Qu.:1766.2  
+##  Max.   :806.00                      Max.   :2355.0  
+##  NA's   :2304
+```
+From above summary, we can notice there are 2304 intervals (observation) missing values of steps. We will focus on treating missing value in later part. The variable "date" is also stored in character, thus I loaded relavant library to transform the variable into R date class.
+
+
+```r
+library(lubridate)
+```
+
+```
+## 
+## Attaching package: 'lubridate'
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     date, intersect, setdiff, union
+```
+
+```r
+data <- transform(data,date = ymd(date))
+```
+
+
+## What is mean total number of steps taken per day?
+To plot histogram of total steps taken per day as well as calculate means and median steps taken per day, I preprocess the data in following way:
+
+1. Group the data by date.  
+4. absettesting  
+2. Summarize the data using summation function.  
+3. testingtest.    
+
+## What is the average daily activity pattern?
+
+
+
+## Imputing missing values
+
+
+
+## Are there differences in activity patterns between weekdays and weekends?
